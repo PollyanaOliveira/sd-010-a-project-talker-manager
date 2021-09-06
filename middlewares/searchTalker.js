@@ -1,6 +1,6 @@
 // 7 - Crie o endpoint GET /talker/search?q=searchTerm
 
-const fs = require('fs');
+const { readFileSync } = require('fs');
 const { validateToken } = require('../services');
 
 const searchTalker = (req, res) => {
@@ -12,7 +12,7 @@ const searchTalker = (req, res) => {
     return res.status(isValidToken.status).json({ message: isValidToken.message });
   }
 
-  const talkers = JSON.parse(fs.readFileSync('talker.json', 'utf-8'));
+  const talkers = JSON.parse(readFileSync('talker.json'));
 
   if (!talker) { return res.status(200).json(talkers); }
 
